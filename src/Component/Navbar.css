@@ -1,0 +1,30 @@
+nav {
+    background-color: #00d9ff;
+    height: 50px;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  li {
+    margin: 0 10px;
+  }
+  
+  li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  li a:hover {
+    text-decoration: underline;
+  }
+  
