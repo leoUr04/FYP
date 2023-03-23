@@ -34,7 +34,7 @@
     margin-top: 10px;
     width: 300px;
     max-width: 100%;
-    margin-bottom: 1px;
+    margin-bottom: -10px;
   }
   
   button {

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './Login.css';
+import { Link } from 'react-router-dom';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [Email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -15,7 +16,7 @@ function Login() {
 
   const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(`Username: ${username}`);
+      console.log(`Email: ${Email}`);
       console.log(`Password: ${password}`);
   };
 
@@ -24,11 +25,11 @@ function Login() {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="Email">Email:</label>
           <input
-            type="text"
-            id="username"
-            value={username}
+            type="Email"
+            id="Email"
+            value={Email}
             onChange={handleUsernameChange}
           />
         </div>
@@ -42,6 +43,7 @@ function Login() {
           />
         </div>
         <button type="submit">Login</button>
+        <p>New to?</p><Link to="/Register">Register</Link>
       </form>
     </div>
   );
