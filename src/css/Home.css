@@ -1,0 +1,48 @@
+.home-container {
+  background-image: url("/public/images/banner.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 80vh;
+  width: inherit;
+}
+
+/* Center search container on page */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 8px -10px 0px -8px;
+}
+
+/* Style the search form */
+.home-form {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Style the form inputs and labels */
+.home-form label {
+  margin-right: 5px;
+}
+.home-form input,
+.home-form select {
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.home-form input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+.home-form input[type="submit"]:hover {
+  background-color: #45a049;
+}

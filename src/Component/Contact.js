@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import './Contact.css';
+import '../css/Contact.css';
 
 function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [subject, setsubject] = useState('');
   const [message, setMessage] = useState('');
 
   function handleNameChange(event) {
@@ -12,6 +13,10 @@ function Contact() {
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
+  }
+
+  function handleSubjectChange(event) {
+    setsubject(event.target.value);
   }
 
   function handleMessageChange(event) {
@@ -24,29 +29,31 @@ function Contact() {
     // TODO: Handle submitting form data to server here
     setName('');
     setEmail('');
+    setsubject('');
     setMessage('');
   }
 
   return (
-    <div>
-      <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={name} onChange={handleNameChange} />
+    <div className="contact-container">
+      <h2 className="contact-heading">Contact Us</h2>
+      <form className="contact-form" onSubmit={handleSubmit}>
+        <label className="contact-label">
+          <input className="contact-input" placeholder='Name' type="text" value={name} onChange={handleNameChange} />
         </label>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={handleEmailChange} />
+        <label className="contact-label">
+          <input className="contact-input" placeholder='Email' type="email" value={email} onChange={handleEmailChange} />
         </label>
-        <label>
-          Message:
-          <textarea value={message} onChange={handleMessageChange} />
+        <label className="contact-label">
+          <input className="contact-input" placeholder='Subject' type="subject" value={subject} onChange={handleSubjectChange} />
         </label>
-        <button type="submit">Submit</button>
+        <label className="contact-label">
+          <textarea className="contact-textarea" placeholder='Message' value={message} onChange={handleMessageChange} />
+        </label>
+        <button className="contact-btn" type="submit">Submit</button>
       </form>
     </div>
   );
 }
 
 export default Contact;
+
