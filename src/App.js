@@ -1,15 +1,23 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Navbar from './Component/Navbar';
-import Login from './Component/Login';
-import Register from './Component/Register';
-import Contact from './Component/Contact';
-import AboutUs from "./Component/AboutUs";
-import Home from './Component/Home';
-import Footer from './Component/Footer';
+import { BrowserRouter, Route, Routes, useLocation} from 'react-router-dom';
+import Navbar from './Component/User/Navbar';
+import Login from './Component/User/Login';
+import Register from './Component/User/Register';
+import Contact from './Component/User/Contact';
+import AboutUs from "./Component/User/AboutUs";
+import Home from './Component/User/Home';
+import Footer from './Component/User/Footer';
+import Dashboard from './Component/Admin/Dashboard';
+
 function App() {
+
+  const location = useLocation();
+  console.log('pathname', location.pathname);
+
   return (
     <div className="App">
+
+    <BrowserRouter>
       <Navbar />
       <Routes>
       <Route path="/Home" element={Home()} />
@@ -19,6 +27,11 @@ function App() {
       <Route path="/AboutUs" element={AboutUs()} />
       </Routes>
       <Footer />
+
+      <Routes>
+      <Route path="/Admin" element={Dashboard()} />
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }

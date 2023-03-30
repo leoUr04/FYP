@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import '../css/Register.css';
+import './css/Register.css';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 function Register() {
   const [firstName, setFirstName] = useState('');
@@ -10,8 +11,12 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [inputs] = useState({})
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios.post('http://localhost:80/api/user/save', inputs);
+    console.log(inputs);
     console.log(`First Name: ${firstName}`);
     console.log(`Last Name: ${lastName}`);
     console.log(`Email: ${email}`);
