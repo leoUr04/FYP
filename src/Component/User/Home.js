@@ -4,9 +4,9 @@ import "./css/Home.css"
 function Home() {
   return (
     <div className="home-container">
-      {/* //<h1 className='home_title'>Find Your Next Home</h1> */}
+      <h1 className="home-title">Find your next home</h1>
       <form className='home-form'>
-      <label className='home-label' htmlFor="property_purpose">Purpose:</label>
+        <label className='home-label' htmlFor="property_purpose">Purpose:</label>
         <select id="property_type" name="property_type">
           <option value="house">Buy</option>
           <option value="apartment">Rent</option>
@@ -37,4 +37,6 @@ function Home() {
 }
 
 export default Home;
+
+
 
