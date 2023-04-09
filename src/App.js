@@ -7,7 +7,7 @@ import Contact from './Component/User/Contact';
 import AboutUs from "./Component/User/AboutUs";
 import Home from './Component/User/Home';
 import Footer from './Component/User/Footer';
-import Buy from './Component/User/Buy';
+import Listings from './Component/User/Listings';
 function App() {
 
   return (
@@ -17,7 +17,7 @@ function App() {
       <Route path="/Home" element={Home()} />
       <Route path="/Login" element={Login()} />
       <Route path="/Register" element={Register()} />
-      <Route path="/Buy" element={Buy()}/>
+      <Route path="/Listings" element={Listings()}/>
       <Route path="/Contact" element={Contact()} />
       <Route path="/AboutUs" element={AboutUs()} />
       </Routes>

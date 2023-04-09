@@ -10,10 +10,7 @@ function Navbar() {
           <Link to="/Home">Home</Link>
         </li>
         <li>
-          <Link to="/Buy">Buy</Link>
-        </li>
-        <li>
-          <Link to="/Rent">Rent</Link>
+          <Link to="/Listings">Listings</Link>
         </li>
         <li>
           <Link to="/AboutUs">About Us</Link>
@@ -24,10 +21,7 @@ function Navbar() {
         </div>
         <div className='login-register'>
         <li>
-          <Link to="/Login">Login</Link>
-        </li>
-        <li>
-          <Link to="/Register">Register</Link>
+          <Link to="/Login">Login/Register</Link>
         </li>
       </div>
     </nav>
