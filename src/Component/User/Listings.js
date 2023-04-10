@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Import Axios library for making HTTP requests
 // import Sidebar from './sidebar';
 import './css/Listings.css';
 
 function Listings() {
   const [pageNumber, setPageNumber] = useState(1); // Initialize the page number state with 1
-  const [listingData, setListingData] = useState([]); // Initialize state for listing data
+  const [titles, setTitles] = useState([]); // Initialize the titles state with an empty array
 
   useEffect(() => {
-    // Fetch listing data from backend API on component mount
-    fetchListingData();
-  }, []);
-
-  const fetchListingData = () => {
-    // Make HTTP request to fetch listing data from backend API
-    axios.get('http://localhost:80/api/listings.php') // Replace with your backend API endpoint for fetching listing data
-      .then(response => {
-        // Update state with fetched listing data
-        setListingData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching listing data:', error);
-      });
-  }
+    // Fetch titles from the real estate database and update the titles state
+    const fetchTitles = async () => {
+      try {
+        const response = await fetch('http://localhost:80/api/listings.php'); // Replace with your API endpoint for fetching titles
+        const data = await response.json();
+        setTitles(data.titles || []); // Use empty array as fallback if titles are undefined in the API response
+      } catch (error) {
+        console.error('Error fetching titles:', error);
+      }
+    };
+    fetchTitles();
+  }, []); // Empty dependency array to run the effect only once, on component mount
 
   const handlePageUp = () => {
     setPageNumber(pageNumber + 1); // Increment the page number on page up button click
@@ -38,19 +34,15 @@ function Listings() {
     <div className="listings-container">
       {/* <Sidebar /> */}
       <div className="dashboard-boxes">
-        {/* Render listing data in the first box */}
-        {listingData.length > 0 && (
-          <div className="dashboard-box">
-            <img src={listingData[0].image} alt={listingData[0].title} />
-            <h2>{listingData[0].title}</h2>
-          </div>
+        {titles && titles.length > 0 ? (
+          titles.slice(0, 4).map((title, index) => ( // Update to display only first 4 titles
+            <div key={index} className="dashboard-box">
+              {title} {/* Display the title inside the box */}
+            </div>
+          ))
+        ) : (
+          <div>No titles found</div> // Display a fallback message if titles are empty or undefined
         )}
-        <div className="dashboard-box">
-        </div>
-        <div className="dashboard-box">
-        </div>
-        <div className="dashboard-box">
-        </div>
       </div>
       <div className="page-number-bar">
         <button className="previous-button" onClick={handlePageDown}>&lt;</button>
@@ -62,5 +54,4 @@ function Listings() {
 }
 
 export default Listings;
-
 

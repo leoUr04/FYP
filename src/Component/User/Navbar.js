@@ -1,13 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './css/Navbar.css';
 
 function Navbar() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/Home';
+
   return (
     <nav>
       <div className='main'>
-      <li>
-          <Link to="/Home">Home</Link>
+        <li className="sidebar-menu-item">
+          <Link to="/Home" className={isHomePage ? 'active' : ''}>Home</Link>
         </li>
         <li>
           <Link to="/Listings">Listings</Link>
@@ -18,8 +21,8 @@ function Navbar() {
         <li>
           <Link to="/Contact">Contact</Link>
         </li>
-        </div>
-        <div className='login-register'>
+      </div>
+      <div className='login-register'>
         <li>
           <Link to="/Login">Login/Register</Link>
         </li>

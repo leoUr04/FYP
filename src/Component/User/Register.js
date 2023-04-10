@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./css/Register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Register() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
@@ -16,9 +15,10 @@ function Register() {
     passwordMatchError: "",
   });
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Email validation using regular expression
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let newErrors = {
       emailError: "",
@@ -50,20 +50,30 @@ function Register() {
         mobileNumberError: "",
         passwordMatchError: "",
       });
-      axios.post("http://localhost:80/api/registration.php", {
-        firstName,
-        lastName,
-        email,
-        mobileNumber,
-        password,
-        confirmPassword,
-      });
-      console.log(`firstname: ${firstName}`);
-      console.log(`Last Name: ${lastName}`);
-      console.log(`Email: ${email}`);
-      console.log(`Mobile Number: ${mobileNumber}`);
-      console.log(`Password: ${password}`);
-      console.log(`Confirm Password: ${confirmPassword}`);
+      const userData = {
+        name: name,
+        email: email,
+        mobileNumber: mobileNumber,
+        password: password,
+      };
+      try {
+        const response = await axios.post(
+          "http://localhost:80/api/registration.php",
+          userData
+        );
+        console.log("Response from backend:", response.data);
+        navigate('/Login');
+        
+        setName("");
+        setEmail("");
+        setMobileNumber("");
+        setPassword("");
+        setConfirmPassword("");
+
+      } catch (error) {
+        console.error("Error sending data to backend:", error);
+      }
+      console.log(`UserData: ${JSON.stringify(userData)}`);
     }
   };
 
@@ -74,20 +84,9 @@ function Register() {
         <label className="register-label">
           <input
             type="text"
-            placeholder="First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            className="register-input"
-            required
-          />
-        </label>
-        <br />
-        <label className="register-label">
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="register-input"
             required
           />

@@ -3,10 +3,11 @@ import './css/Login.css';
 import { Link } from 'react-router-dom';
 
 function Login() {
-  const [Email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleUsernameChange = (event) => {
+  const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
@@ -14,10 +15,32 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`Email: ${Email}`);
-    console.log(`Password: ${password}`);
+    try {
+      // Make an API call to your backend service or database to validate the email and password
+      const response = await fetch('http://localhost/api/login.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      // Handle the response and perform appropriate actions
+      if (response.ok) {
+        // If response is successful, perform login action
+        // e.g. redirect to dashboard or set authentication state
+        console.log('Login successful');
+      } else {
+        // If response is not successful, display error message
+        setError('Invalid email or password');
+      }
+    } catch (error) {
+      // Handle any errors that may occur during the API call
+      console.error('Login error:', error);
+      setError('Failed to login. Please try again later.');
+    }
   };
 
   return (
@@ -25,13 +48,13 @@ function Login() {
       <h1 className="login-heading">Login</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <div>
-          <label htmlFor="Email" className="login-label"></label>
+          <label htmlFor="email" className="login-label"></label>
           <input
-            type="Email"
+            type="email"
             placeholder='Email'
-            id="Email"
-            value={Email}
-            onChange={handleUsernameChange}
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
             className="login-form-input"
           />
         </div>
@@ -47,6 +70,7 @@ function Login() {
           />
         </div>
         <button type="submit" className="login-button">Login</button>
+        {error && <p className="login-error">{error}</p>}
         <p className="login-text">New to?</p><Link to="/Register" className="login-link">Register</Link>
       </form>
     </div>
@@ -54,5 +78,3 @@ function Login() {
 }
 
 export default Login;
-
-

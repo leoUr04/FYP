@@ -4,19 +4,29 @@ import './css/Contact.css';
 function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [subject, setsubject] = useState('');
+  const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   function handleNameChange(event) {
     setName(event.target.value);
   }
 
   function handleEmailChange(event) {
-    setEmail(event.target.value);
+    const enteredEmail = event.target.value;
+    setEmail(enteredEmail);
+
+    // Email validation using regex pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(enteredEmail)) {
+      setEmailError('Please enter a valid email address');
+    } else {
+      setEmailError('');
+    }
   }
 
   function handleSubjectChange(event) {
-    setsubject(event.target.value);
+    setSubject(event.target.value);
   }
 
   function handleMessageChange(event) {
@@ -25,12 +35,39 @@ function Contact() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(`Submitting contact form with name: ${name}, email: ${email}, and message: ${message}`);
-    // TODO: Handle submitting form data to server here
-    setName('');
-    setEmail('');
-    setsubject('');
-    setMessage('');
+
+    // Create an object to represent the form data
+    const formData = {
+      name: name,
+      email: email,
+      subject: subject,
+      message: message
+    };
+
+    // Send a POST request to the backend server with the form data
+    fetch('http://localhost:80/api/contact.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Form data submitted successfully');
+          // Reset form fields
+          setName('');
+          setEmail('');
+          setSubject('');
+          setMessage('');
+          setEmailError('');
+        } else {
+          console.error('Failed to submit form data');
+        }
+      })
+      .catch(error => {
+        console.error('Failed to submit form data', error);
+      });
   }
 
   return (
@@ -42,6 +79,7 @@ function Contact() {
         </label>
         <label className="contact-label">
           <input className="contact-input" placeholder='Email' type="email" value={email} onChange={handleEmailChange} />
+          {emailError && <p className="error-msg">{emailError}</p>}
         </label>
         <label className="contact-label">
           <input className="contact-input" placeholder='Subject' type="subject" value={subject} onChange={handleSubjectChange} />
@@ -56,4 +94,5 @@ function Contact() {
 }
 
 export default Contact;
+
 
