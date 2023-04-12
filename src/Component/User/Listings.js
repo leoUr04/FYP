@@ -1,57 +1,76 @@
 import React, { useState, useEffect } from 'react';
-// import Sidebar from './sidebar';
+import axios from 'axios';
+
 import './css/Listings.css';
+import Sidebar from './sidebar';
 
-function Listings() {
-  const [pageNumber, setPageNumber] = useState(1); // Initialize the page number state with 1
-  const [titles, setTitles] = useState([]); // Initialize the titles state with an empty array
+const Listings = () => {
+  // State to store the fetched data
+  const [houses, setHouses] = useState([]);
+  // State to keep track of current page
+  const [currentPage, setCurrentPage] = useState(1);
 
+  // Fetch data from backend API on component mount
   useEffect(() => {
-    // Fetch titles from the real estate database and update the titles state
-    const fetchTitles = async () => {
+    const fetchHouses = async () => {
       try {
-        const response = await fetch('http://localhost:80/api/listings.php'); // Replace with your API endpoint for fetching titles
-        const data = await response.json();
-        setTitles(data.titles || []); // Use empty array as fallback if titles are undefined in the API response
+        const response = await axios.get('http://localhost/api/listings.php');
+        setHouses(response.data);
       } catch (error) {
-        console.error('Error fetching titles:', error);
+        console.error('Error fetching houses:', error);
       }
     };
-    fetchTitles();
-  }, []); // Empty dependency array to run the effect only once, on component mount
+    fetchHouses();
+  }, []);
 
-  const handlePageUp = () => {
-    setPageNumber(pageNumber + 1); // Increment the page number on page up button click
-  }
+  // Function to handle next page button click
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
-  const handlePageDown = () => {
-    if (pageNumber > 1) {
-      setPageNumber(pageNumber - 1); // Decrement the page number on page down button click, minimum value is 1
-    }
-  }
+  // Function to handle previous page button click
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  // Calculate starting index and ending index based on current page
+  const startIndex = (currentPage - 1) * 4;
+  const endIndex = startIndex + 4;
 
   return (
     <div className="listings-container">
-      {/* <Sidebar /> */}
-      <div className="dashboard-boxes">
-        {titles && titles.length > 0 ? (
-          titles.slice(0, 4).map((title, index) => ( // Update to display only first 4 titles
-            <div key={index} className="dashboard-box">
-              {title} {/* Display the title inside the box */}
-            </div>
-          ))
-        ) : (
-          <div>No titles found</div> // Display a fallback message if titles are empty or undefined
-        )}
+      <Sidebar />
+      <div className="house-grid">
+        {houses.slice(startIndex, endIndex).map((house, index) => (
+          <div key={index} className="house-card">
+            <img src={house.image1} alt={house.title} className="house-image" />
+            <h2 className="house-title">{house.title}</h2>
+          </div>
+        ))}
       </div>
-      <div className="page-number-bar">
-        <button className="previous-button" onClick={handlePageDown}>&lt;</button>
-        <span className="page-number">{pageNumber}</span> {/* Display the current page number */}
-        <button className="next-button" onClick={handlePageUp}>&gt;</button>
+      <div className="pagination">
+        {currentPage > 1 && (
+          <button
+            className="pagination-button"
+            onClick={handlePrevPage}
+          >
+            {'<'}
+          </button>
+        )}
+        <span className="pagination-page">{currentPage}</span>
+        {endIndex < houses.length && (
+          <button
+            className="pagination-button"
+            onClick={handleNextPage}
+          >
+            {'>'}
+          </button>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default Listings;
+
 

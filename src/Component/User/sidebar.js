@@ -2,30 +2,35 @@ import React, { useState } from "react";
 import "./css/sidebar.css";
 
 function Sidebar() {
-  const [selectedCategory, setSelectedCategory] = useState(null); // State to keep track of selected category
-  const [selectedLocation, setSelectedLocation] = useState("location"); // State to keep track of selected location
-  const [selectedPrice, setSelectedPrice] = useState("Price"); // State to keep track of selected price
-
-  // Function to handle category button click event
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
+  // Define state variables for selected category, location, and price
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("Price");
 
   // Function to handle location select change event
   const handleLocationChange = (event) => {
+    // Update state with selected location
     setSelectedLocation(event.target.value);
   };
 
   // Function to handle price select change event
   const handlePriceChange = (event) => {
+    // Update state with selected price
     setSelectedPrice(event.target.value);
   };
 
   // Function to handle clear filter button click event
   const handleClearFilterClick = () => {
-    setSelectedCategory(null);
-    setSelectedLocation("location");
-    setSelectedPrice("Price");
+    // Make HTTP request to backend PHP file to clear filters
+    fetch("/backend.php?clear=true")
+      .then(response => response.json())
+      .then(data => {
+        // Update state with cleared filters
+        setSelectedCategory(null);
+        setSelectedLocation("");
+        setSelectedPrice("Price");
+      })
+      .catch(error => console.error("Error clearing filters:", error));
   };
 
   return (
