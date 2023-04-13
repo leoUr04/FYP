@@ -8,6 +8,8 @@ import Contact from './Component/User/Contact';
 import AboutUs from "./Component/User/AboutUs";
 import Footer from './Component/User/Footer';
 import Listings from './Component/User/Listings';
+import HouseInfo from './Component/User/Houseinfo';
+
 function App() {
 
   return (
@@ -18,6 +20,7 @@ function App() {
       <Route path="/Login" element={Login()} />
       <Route path="/Register" element={Register()} />
       <Route path="/Listings" element={Listings()}/>
+      <Route path="/houseinfo/:id" component={HouseInfo} />
       <Route path="/Contact" element={Contact()} />
       <Route path="/AboutUs" element={AboutUs()} />
       </Routes>

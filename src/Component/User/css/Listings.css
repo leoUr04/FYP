@@ -8,13 +8,14 @@
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 10px; /* Update top margin to desired value */
 }
 
 .house-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: -120px;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 100px;
+  margin-top: -80px;
 }
 
 .house-card {
@@ -26,11 +27,18 @@
 .house-title {
   font-size: 18px;
   margin-top: 10px;
+  color: #007bff; /* Add blue color to image titles */
+  text-decoration: none; /* Remove underline from image titles */
+  cursor: pointer; /* Add pointer cursor for hover effect */
+}
+
+.house-title:hover {
+  text-decoration: underline; /* Add underline on hover */
 }
 
 .house-image {
   max-width: 100%;
-  max-height: 3in;
+  max-height: 2in;
   object-fit: contain;
   padding-top: 100px;
 }
@@ -60,3 +68,4 @@
   color: #000;
   font-weight: bold;
 }
+

@@ -75,17 +75,17 @@ function Contact() {
       <h2 className="contact-heading">Contact Us</h2>
       <form className="contact-form" onSubmit={handleSubmit}>
         <label className="contact-label">
-          <input className="contact-input" placeholder='Name' type="text" value={name} onChange={handleNameChange} />
+          <input className="contact-input" placeholder='Name' type="text" value={name} onChange={handleNameChange} required/>
         </label>
         <label className="contact-label">
-          <input className="contact-input" placeholder='Email' type="email" value={email} onChange={handleEmailChange} />
+          <input className="contact-input" placeholder='Email' type="email" value={email} onChange={handleEmailChange} required/>
           {emailError && <p className="error-msg">{emailError}</p>}
         </label>
         <label className="contact-label">
           <input className="contact-input" placeholder='Subject' type="subject" value={subject} onChange={handleSubjectChange} />
         </label>
         <label className="contact-label">
-          <textarea className="contact-textarea" placeholder='Message' value={message} onChange={handleMessageChange} />
+          <textarea className="contact-textarea" placeholder='Message' value={message} onChange={handleMessageChange} required/>
         </label>
         <button className="contact-btn" type="submit">Submit</button>
       </form>
