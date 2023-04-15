@@ -9,7 +9,8 @@ import AboutUs from "./Component/User/AboutUs";
 import Footer from './Component/User/Footer';
 import Listings from './Component/User/Listings';
 import HouseInfo from './Component/User/Houseinfo';
-
+import Calculator from './Component/User/Calculator';
+import Loginmenu from './Component/User/Loginmenu';
 function App() {
 
   return (
@@ -23,6 +24,8 @@ function App() {
       <Route path="/houseinfo/:id" component={HouseInfo} />
       <Route path="/Contact" element={Contact()} />
       <Route path="/AboutUs" element={AboutUs()} />
+      <Route path="/Calculator" element={Calculator()} />
+      <Route path="/Loginmenu" element={Loginmenu()} />
       </Routes>
       <Footer />
     </div>

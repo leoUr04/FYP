@@ -15,7 +15,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 100px;
-  margin-top: -80px;
 }
 
 .house-card {

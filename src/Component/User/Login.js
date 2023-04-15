@@ -19,7 +19,7 @@ function Login() {
     e.preventDefault();
     try {
       // Make an API call to your backend service or database to validate the email and password
-      const response = await fetch('http://localhost/api/login.php', {
+      const response = await fetch('http://localhost:80/api/login.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

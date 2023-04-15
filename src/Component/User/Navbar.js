@@ -21,10 +21,13 @@ function Navbar() {
         <li>
           <Link to="/Contact">Contact</Link>
         </li>
+        <li>
+          <Link to="/Calculator">Calculator</Link>
+        </li>
       </div>
       <div className='login-register'>
         <li>
-          <Link to="/Login">Login/Register</Link>
+          <Link to="/Loginmenu">Login/Register</Link>
         </li>
       </div>
     </nav>
