@@ -151,7 +151,7 @@ function Register() {
           Register
         </button>
       </form>
-      <p className="register-login-link">
+      <p className="register-link">
         Already have an account? <Link to="/login">Login</Link>
       </p>
     </div>

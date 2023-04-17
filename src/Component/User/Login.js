@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './css/Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Get the navigate function from react-router-dom
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -32,6 +33,7 @@ function Login() {
         // If response is successful, perform login action
         // e.g. redirect to dashboard or set authentication state
         console.log('Login successful');
+        navigate('/Listings'); // Navigate to home page after successful login
       } else {
         // If response is not successful, display error message
         setError('Invalid email or password');
@@ -43,15 +45,20 @@ function Login() {
     }
   };
 
+  const handleRegisterClick = () => {
+    navigate('/Register'); // Navigate to Register page
+  };
+
   return (
     <div className="login-container">
       <h1 className="login-heading">Login</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <div>
-          <label htmlFor="email" className="login-label"></label>
+          <label htmlFor="email" className="login-label">
+          </label>
           <input
             type="email"
-            placeholder='Email'
+            placeholder="Email"
             id="email"
             value={email}
             onChange={handleEmailChange}
@@ -59,20 +66,25 @@ function Login() {
           />
         </div>
         <div>
-          <label htmlFor="password" className="login-label"></label>
+          <label htmlFor="password" className="login-label">
+          </label>
           <input
             type="password"
-            placeholder='Password'
+            placeholder="Password"
             id="password"
             value={password}
             onChange={handlePasswordChange}
             className="login-form-input"
           />
         </div>
-        <button type="submit" className="login-button">Login</button>
-        {error && <p className="login-error">{error}</p>}
-        <p className="login-text">New to?</p><Link to="/Register" className="login-link">Register</Link>
+        <button type="submit" className="login-form-button">
+          Login
+        </button>
       </form>
+      <p className="error">{error}</p>
+      <p className="login-link">
+        New? <Link to="/register">Login</Link>
+      </p>
     </div>
   );
 }

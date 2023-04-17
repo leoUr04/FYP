@@ -1,37 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useParams } from 'react-router'
 
 const HouseInfo = ({ match }) => {
-  // State to store the fetched house data
-  const [house, setHouse] = useState(null);
+  const [listings, setListings] = useState(null);
+  const {id} = useParams(); // destructure the returned object to get only the "id" value
 
-  // Fetch house data from backend API based on the ID in the URL
   useEffect(() => {
-    const fetchHouse = async () => {
+    // Fetch house data from API based on house ID
+    const fetchListings = async () => {
       try {
-        const response = await axios.get(`http://localhost/api/houseinfo.php?id=${match.params.id}`);
-        setHouse(response.data);
+        const response = await fetch(`http://localhost:80/api/houseinfo/${id}`);
+        const data = await response.json();
+        setListings(data);
       } catch (error) {
         console.error('Error fetching house:', error);
       }
     };
-    fetchHouse();
-  }, [match.params.id]);
+    fetchListings();
+  }, [id]);
 
-  // Render loading state while house data is being fetched
-  if (!house) {
+  if (!listings) {
     return <div>Loading...</div>;
   }
 
-  // Render house information once data is fetched
   return (
     <div>
-      <h2>{house.title}</h2>
-      <p>{house.description}</p>
-      {/* Render other house information */}
+      <h1>House Information</h1>
+      <ul>
+        <li>Title: {listings.title}</li>
+        <li>Location: {listings.location}</li>
+        <li>Price: {listings.price}</li>
+      </ul>
     </div>
   );
 };
 
 export default HouseInfo;
+
 
