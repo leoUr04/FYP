@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import './css/Navbar.css';
 
 function Navbar() {
-  const location = useLocation();
-  const isHomePage = location.pathname === '/Home';
-
+  
   return (
     <nav>
       <div className='main'>
         <li className="sidebar-menu-item">
-          <Link to="/Home" className={isHomePage ? 'active' : ''}>Home</Link>
+          <Link to="/Home">Home</Link>
         </li>
         <li>
           <Link to="/Listings">Listings</Link>

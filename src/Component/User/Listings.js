@@ -6,7 +6,7 @@ import './css/Listings.css';
 const Listings = () => {
   const [houses, setHouses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchHouses = async () => {
@@ -34,7 +34,7 @@ const Listings = () => {
   const handleHouseClick = (id) => {
     console.log(`House ID: ${id}`);
     axios
-      .post(`http://localhost:80/api/houseinfo.php?id=${id}`)
+      .post(`http://localhost:80/api/listings.php?id=${id}`)
       .then((response) => {
         console.log('Response:', response.data);
       })
@@ -43,18 +43,14 @@ const Listings = () => {
       });
   };
 
-  // Function to handle search term change
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Perform search operation with searchTerm
     console.log('Search Term:', searchTerm);
-    // You can use the searchTerm to perform search operations on houses data
-    // and update the houses state accordingly
+
   };
 
   return (
@@ -63,7 +59,7 @@ const Listings = () => {
         <input
           type="text"
           className="search-input"
-          placeholder="Search by title, location, or type"
+          placeholder="Search by title"
           value={searchTerm}
           onChange={handleSearchTermChange}
         />
@@ -75,9 +71,7 @@ const Listings = () => {
         {houses
           .filter(
             (house) =>
-              house.title.toLowerCase().includes(searchTerm.toLowerCase()) || // Search by title
-              house.location.toLowerCase().includes(searchTerm.toLowerCase()) || // Search by location
-              house.type.toLowerCase().includes(searchTerm.toLowerCase()) // Search by type
+              house.title?.toLowerCase().includes(searchTerm.toLowerCase())
           )
           .slice(startIndex, endIndex)
           .map((house, index) => (
@@ -85,7 +79,7 @@ const Listings = () => {
               <Link
                 to={`/houseinfo/${house.id}`}
                 className="house-card-content"
-                onClick={() => handleHouseClick(house.id)} // Pass house id to handleHouseClick
+                onClick={() => handleHouseClick(house.id)}
               >
                 <img src={house.image1} alt={house.title} className="house-image" />
                 <h2 className="house-title">{house.title}</h2>

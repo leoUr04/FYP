@@ -2,13 +2,14 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  height: 65vh;
 }
 
 .listings-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-  margin-top: 10px; /* Update top margin to desired value */
+  margin-top: 10px;
 }
 
 .house-grid {
@@ -26,13 +27,13 @@
 .house-title {
   font-size: 18px;
   margin-top: 10px;
-  color: #007bff; /* Add blue color to image titles */
-  text-decoration: none; /* Remove underline from image titles */
-  cursor: pointer; /* Add pointer cursor for hover effect */
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .house-title:hover {
-  text-decoration: underline; /* Add underline on hover */
+  text-decoration: underline;
 }
 
 .house-image {
@@ -68,3 +69,26 @@
   font-weight: bold;
 }
 
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #000;
+  margin-right: 8px;
+}
+
+.search-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  justify-content: center;
+}

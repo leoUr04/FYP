@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import './Dashboard.css';
+import './css/Dashboard.css';
 
 const Dashboard = () => {
-  const [propertiesCount, setPropertiesCount] = useState(0);
-  const [tenantsCount, setTenantsCount] = useState(0);
-  const [ownersCount, setOwnersCount] = useState(0);
-  const [vacanciesCount, setVacanciesCount] = useState(0);
-  const [rentalsCount, setRentalsCount] = useState(0);
-  const [maintenanceRequestsCount, setMaintenanceRequestsCount] = useState(0);
+  const [listingsCount, setListingsCount] = useState(0);
+  const [userbuyerCount, setUserbuyerCount] = useState(0);
+  const [usersellerCount, setUsersellerCount] = useState(0);
+  const [feedbacksCount, setfeedbacksCount] = useState(0);
 
   useEffect(() => {
+    // Fetch data from database and update state accordingly
     const fetchCounts = async () => {
       const response = await fetch('http://localhost:80/api/counts.php');
       const data = await response.json();
   
-      setPropertiesCount(data.propertiesCount);
-      setTenantsCount(data.tenantsCount);
-      setOwnersCount(data.ownersCount);
-      setVacanciesCount(data.vacanciesCount);
-      setRentalsCount(data.rentalsCount);
-      setMaintenanceRequestsCount(data.maintenanceRequestsCount);
+      setListingsCount(data.listingsCount);
+      setUserbuyerCount(data.userbuyerCount);
+      setUsersellerCount(data.usersellerCount);
+      setfeedbacksCount(data.feedbacksCount);
     };
   
     fetchCounts();
@@ -32,27 +29,19 @@ const Dashboard = () => {
         <div className="dashboard-boxes">
           <div className="dashboard-box">
             <h2>Properties</h2>
-            <p>{propertiesCount}</p>
+            <p>{listingsCount}</p>
           </div>
           <div className="dashboard-box">
-            <h2>Tenants</h2>
-            <p>{tenantsCount}</p>
+            <h2>Buyers</h2>
+            <p>{userbuyerCount}</p>
           </div>
           <div className="dashboard-box">
-            <h2>Owners</h2>
-            <p>{ownersCount}</p>
+            <h2>Sellers</h2>
+            <p>{usersellerCount}</p>
           </div>
           <div className="dashboard-box">
-            <h2>Vacancies</h2>
-            <p>{vacanciesCount}</p>
-          </div>
-          <div className="dashboard-box">
-            <h2>Rentals</h2>
-            <p>{rentalsCount}</p>
-          </div>
-          <div className="dashboard-box">
-            <h2>Maintenance Requests</h2>
-            <p>{maintenanceRequestsCount}</p>
+            <h2>Feedbacks</h2>
+            <p>{feedbacksCount}</p>
           </div>
         </div>
       </main>

@@ -1,0 +1,47 @@
+.addseller-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .addseller-heading {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  
+  .addseller-label {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .addseller-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .addseller-textarea {
+    height: 200px; /* Increase height to make the message box bigger */
+  }
+  
+  .addseller-btn {
+    background-color: #0077B6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .addseller-btn:hover {
+    background-color: #005d8f;
+  }
+  

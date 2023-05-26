@@ -94,7 +94,7 @@ function Register() {
         <br />
         <label className="register-label">
           <input
-            type="text"
+            type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -108,7 +108,7 @@ function Register() {
         <br />
         <label className="register-label">
           <input
-            type="text"
+            type="tel"
             placeholder="Mobile Number"
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import "./user.css";
+import "./css/user.css";
 
 const Buy = () => {
   const [buyData, setBuyData] = useState([]);
   const [formData, setFormData] = useState({
     id: "",
-    name: "",
+    title: "",
     purpose: "",
     type: "",
     area: "",
     price: "",
     location: "",
-    status: "",
   });
   const [showForm, setShowForm] = useState(false); // Added state to control form visibility
 
@@ -67,13 +66,12 @@ const Buy = () => {
   const handleUpdateClick = (item) => {
     setFormData({
       id: item.id,
-      name: item.name,
+      title: item.title,
       purpose: item.purpose,
       type: item.type,
       area: item.area,
       price: item.price,
       location: item.location,
-      status: item.status,
     });
     setShowForm(true); // Show form when update button is clicked
   };
@@ -85,13 +83,12 @@ const Buy = () => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Title</th>
             <th>Purpose</th>
             <th>Type</th>
             <th>Area</th>
             <th>Price</th>
             <th>Location</th>
-            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -99,13 +96,12 @@ const Buy = () => {
           {buyData.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
-              <td>{item.name}</td>
+              <td>{item.title}</td>
               <td>{item.purpose}</td>
               <td>{item.type}</td>
               <td>{item.area}</td>
               <td>{item.price}</td>
               <td>{item.location}</td>
-              <td>{item.status}</td>
               <td>
                 <button onClick={() => handleUpdateClick(item)}>Update</button>
                 <button onClick={() => handleDeleteClick(item.id)}>
@@ -121,11 +117,11 @@ const Buy = () => {
       {showForm && (
         <form onSubmit={handleFormSubmit}>
           <h2>Update Data</h2>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Title</label>
           <input
             type="text"
             name="name"
-            value={formData.name}
+            value={formData.title}
             onChange={handleInputChange}
           />
           <label htmlFor="name">Purpose</label>
@@ -161,13 +157,6 @@ const Buy = () => {
             type="text"
             name="location"
             value={formData.location}
-            onChange={handleInputChange}
-          />
-          <label htmlFor="status">Status</label>
-          <input
-            type="text"
-            name="status"
-            value={formData.status}
             onChange={handleInputChange}
           />
           <button type="submit">Submit</button>

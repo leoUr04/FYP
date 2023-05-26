@@ -75,7 +75,7 @@ function Contact() {
       <h2 className="contact-heading">Contact Us</h2>
       <form className="contact-form" onSubmit={handleSubmit}>
         <label className="contact-label">
-          <input className="contact-input" placeholder='Name' type="text" value={name} onChange={handleNameChange} required/>
+          <input className="contact-input" placeholder='Name' type="name" value={name} onChange={handleNameChange} required/>
         </label>
         <label className="contact-label">
           <input className="contact-input" placeholder='Email' type="email" value={email} onChange={handleEmailChange} required/>

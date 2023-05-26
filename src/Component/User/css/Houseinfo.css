@@ -1,0 +1,100 @@
+.house-info-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.house-info-slider-container {
+  margin-bottom: 20px;
+}
+
+.house-info-slider {
+  max-height: 400px;
+}
+
+.house-info-slider img {
+  max-height: 300px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.house-info-details {
+  margin-bottom: 20px;
+}
+
+.house-info-title {
+  font-size: 50px;
+  font-weight: bold;
+  margin-top: 100px;
+}
+
+.house-info-list {
+  list-style-type: none;
+  padding: 0;
+  font-size: 40px;
+}
+
+.house-info-list-item {
+  margin-bottom: 10px;
+}
+
+.house-info-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.house-info-form {
+  margin-top: 20px;
+}
+
+.house-info-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.house-info-form button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.house-info-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.house-info-button {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.house-info-form-button[type="submit"][type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.house-info-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  max-width: 300px;
+}

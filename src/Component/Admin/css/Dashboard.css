@@ -1,0 +1,41 @@
+main {
+    margin-left: 250px; /* Adjust the margin-left value to match the width of your sidebar */
+  }
+  
+  .dashboard-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the boxes horizontally */
+    align-items: center; /* Center the boxes vertically */
+    margin: 30px;
+  }
+  
+  .dashboard-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #eee;
+    padding: 20px;
+    margin: 20px; /* Add some margin around each box */
+    width: 200px; /* Make the boxes square */
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .dashboard-box h2 {
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-box p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  body {
+    background-color: #f0f5f9; /* Add a light blue background color to the page */
+  }
+  

@@ -1,0 +1,60 @@
+/* VideoTour.css */
+.table-title {
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  
+  .video-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    color: #444;
+    background-color: #3c4d69;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .video-table-header {
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+    background-color: #3c4d69;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .video-table-row:nth-child(even) {
+    background-color: #e0e9f1;
+  }
+  
+  .video-table-row:hover {
+    background-color: #d1dce5;
+  }
+  
+  .video-table-cell:first-child {
+    background-color: #f1f6fb;
+    font-weight: bold;
+  }
+  
+  .video-table-cell:nth-child(2) {
+    color: #1f4068;
+  }
+  
+  .video-table-cell:nth-child(3) {
+    color: #2a9d8f;
+  }
+  
+  .video-table-cell {
+    background-color: #fff;
+  }
+  
+  .video-table-row {
+    border-bottom: 1px solid #000;
+    height: 50px;
+  }

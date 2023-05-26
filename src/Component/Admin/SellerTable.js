@@ -1,91 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import './user.css';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import "./css/user.css";
 
 const SellerTable = () => {
-  const [users, setUsers] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [password, setPassword] = useState('');
+  const [sellerData, setSellerData] = useState([]);
+  const [formData, setFormData] = useState({
+    id: "",
+    name: "",
+    email: "",
+    mobilenumber: "",
+    password: "",
+  });
+  const [showForm, setShowForm] = useState(false); // Added state to control form visibility
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:80/api/seller.php');
-      const data = await response.json();
-      setUsers(data);
-    };
-
-    fetchData();
+    fetchSellerData();
   }, []);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, mobileNumber, password })
-    };
+  const fetchSellerData = async () => {
     try {
-      const response = await fetch('http://localhost:80/api/seller.php', requestOptions);
+      const response = await fetch("http://localhost:80/api/seller.php");
       const data = await response.json();
-      console.log(data);
-      setName('');
-      setEmail('');
-      setMobileNumber('');
-      setPassword('');
-      setShowForm(false);
+      setSellerData(data);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error fetching seller data:", error);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:80/api/sellerupdate.php`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log("Data updated successfully:", data);
+      fetchSellerData();
+    } catch (error) {
+      console.error("Error updating seller data:", error);
+    }
+  };
+
+  const handleDeleteClick = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:80/api/sellerdelete.php?deleteid=${id}`,
+        { method: "DELETE" }
+      );
+      const data = await response.json();
+      console.log("Data deleted successfully:", data);
+      fetchSellerData();
+    } catch (error) {
+      console.error("Error deleting seller data:", error);
+    }
+  };
+
+  const handleUpdateClick = (item) => {
+    setFormData({
+      id: item.id,
+      name: item.name,
+      email: item.email,
+      mobilenumber: item.mobilenumber,
+      password: item.password,
+    });
+    setShowForm(true); // Show form when update button is clicked
   };
 
   return (
     <div>
-      <div className="table-title">
-        <h1>Seller Table</h1>
-        <button onClick={() => setShowForm(true)}>Add Seller</button>
-      </div>
-      {showForm && (
-        <form onSubmit={handleSubmit}>
-          <label>
-            <input
-              placeholder='Name'  
-              type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-            />
-          </label>
-          <label>
-            <input
-              placeholder='Email'
-              type="text"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </label>
-          <label>
-            <input
-              placeholder='Mobile Number'
-              type="text"
-              value={mobileNumber}
-              onChange={(event) => setMobileNumber(event.target.value)}
-            />
-          </label>
-          <label>
-            <input
-              placeholder='Password'
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-      )}
+      <h1>Seller Table</h1>
+      <Link to="/add-seller">
+        <button>Add Seller</button>
+      </Link>
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Email</th>
             <th>Mobile Number</th>
@@ -93,18 +90,62 @@ const SellerTable = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.mobileNumber}</td>
-              <td>{user.password}</td>
+          {sellerData.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.email}</td>
+              <td>{item.mobilenumber}</td>
+              <td>{item.password}</td>
+              <td>
+                <button onClick={() => handleUpdateClick(item)}>Update</button>
+                <button onClick={() => handleDeleteClick(item.id)}>
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {/* Form for updating data */}
+      {showForm && (
+        <form onSubmit={handleFormSubmit}>
+          <h2>Update Data</h2>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="name">Email</label>
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="type">Mobile Number</label>
+          <input
+            type="text"
+            name="mobilenumber"
+            value={formData.mobilenumber}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="area">Password</label>
+          <input
+            type="text"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      )}
     </div>
   );
 };
 
 export default SellerTable;
+

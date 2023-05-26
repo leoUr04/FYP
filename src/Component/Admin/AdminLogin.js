@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import './css/Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function Login() {
-  const [email, setEmail] = useState('');
+function Adminlogin() {
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleNameChange = (event) => {
+    setName(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -19,19 +18,19 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:80/api/login.php', {
+      const response = await fetch('http://localhost:80/api/adminlogin.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, password }),
       });
 
       if (response.ok) {
         console.log('Login successful');
-        navigate('/Listings');
+        navigate('/Dashboard');
       } else {
-        setError('Invalid email or password');
+        setError('Invalid name or password');
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -41,17 +40,17 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1 className="login-heading">Login</h1>
+      <h1 className="login-heading">Admin Login</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <div>
-          <label htmlFor="email" className="login-label">
+          <label htmlFor="name" className="login-label">
           </label>
           <input
-            type="text"
+            type="name"
             placeholder="Email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
+            id="name"
+            value={name}
+            onChange={handleNameChange}
             className="login-form-input"
           />
         </div>
@@ -72,11 +71,8 @@ function Login() {
         </button>
       </form>
       <p className="error">{error}</p>
-      <p className="login-link">
-        New? <Link to="/register">Login</Link>
-      </p>
     </div>
   );
 }
 
-export default Login;
+export default Adminlogin;

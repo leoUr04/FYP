@@ -7,8 +7,9 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 30px;
+    margin-top: 200px;
   }
+  
   
   .dashboard-box {
     background-color: #fff;
@@ -16,7 +17,7 @@ main {
     border-radius: 5px;
     box-shadow: 0 0 10px #eee;
     padding: 20px;
-    margin: 20px; 
+    margin: 20px;
     width: 200px;
     height: 200px;
     display: flex;
